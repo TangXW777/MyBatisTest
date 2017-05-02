@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.tang.manytomany.dao.StudentDao"> 
+	<resultMap type="com.tang.manytomany.model.Student" id="studentMap">
+		<id property="sId" column="s_id"/>
+		<result property="sName" column="s_name"/>
+	    <collection property="courses" ofType="com.tang.manytomany.model.Course">
+          <id property="cId" column="c_id"/>
+          <result property="cName" column="c_name"/>
+        </collection>
+	</resultMap> 
+	<select id="selectAll" parameterType="com.tang.manytomany.model.Student" resultMap="studentMap">  
+	    SELECT *  FROM TEST_STUDENT S
+	    LEFT JOIN TEST_COU_STU CS ON CS.CS_SID = S.S_ID
+	    LEFT JOIN TEST_COURSE C ON C.C_ID = CS.CS_CID
+	    <where>
+	    	<if test="sId!=null and sId!=''">S.S_ID=#{sId}</if>
+	    </where>
+	</select>  
+	<insert id="insertInfo" parameterType="com.tang.manytomany.model.Student">  
+	   INSERT INTO TEST_STUDENT (S_ID, S_NAME) VALUES (#{sId},#{sName})  
+	</insert>  
+</mapper>

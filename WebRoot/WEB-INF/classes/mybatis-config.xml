@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC  
+    "-//mybatis.org//DTD Config 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration>  
+    <mappers>  
+        <mapper resource="com/tang/onetoone/dao/ClassesDao.xml"/>  
+        <mapper resource="com/tang/onetomany/dao/OrdersDao.xml"/>  
+        <mapper resource="com/tang/onetomany/dao/CustomerDao.xml"/>  
+        <mapper resource="com/tang/manytomany/dao/CourseDao.xml"/>  
+        <mapper resource="com/tang/manytomany/dao/StudentDao.xml"/>
+    </mappers>
+
+</configuration>

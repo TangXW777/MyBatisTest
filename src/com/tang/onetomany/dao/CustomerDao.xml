@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="com.tang.onetomany.dao.CustomerDao"> 
+	<resultMap type="com.tang.onetomany.model.Customer" id="customerMap">
+		<id property="cId" column="c_id"/>
+		<result property="cName" column="c_name"/>
+	    <collection property="orders" ofType="com.tang.onetomany.model.Orders">
+          <id property="oId" column="o_id"/>
+          <result property="oCode" column="o_code"/>
+        </collection>
+	</resultMap> 
+	<select id="selectAll" parameterType="com.tang.onetomany.model.Customer" resultMap="customerMap">  
+	    SELECT *  FROM TEST_CUSTOMER C
+	    LEFT JOIN TEST_ORDERS O ON C.C_ID = O.O_CUSTOMERID
+	    <where>
+	    	<if test="cId!=null and cId!=''">C.C_ID=#{cId}</if>
+	    </where>
+	</select>  
+	<insert id="insertInfo" parameterType="com.tang.onetomany.model.Customer">  
+	   INSERT INTO TEST_CUSTOMER (C_ID, C_NAME) VALUES (#{cId},#{cName})  
+	</insert>  
+</mapper>
